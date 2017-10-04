@@ -2,22 +2,26 @@ require 'test_helper'
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @comment = comments(:one)
+    blog = create(:blog, owner: create(:user))
+    author = create(:user)
+    article = create(:article, blog: blog, author: author)
+
+    @comment = create(:comment, article: article)
   end
 
   test "should get index" do
-    get comments_url
+    get article_comments_url(@comment.article)
     assert_response :success
   end
 
   test "should get new" do
-    get new_comment_url
+    get new_article_comment_url(@comment.article)
     assert_response :success
   end
 
   test "should create comment" do
     assert_difference('Comment.count') do
-      post comments_url, params: { comment: { article_id: @comment.article_id, author: @comment.author, content: @comment.content } }
+      post article_comments_url(@comment.article), params: { comment: { article_id: @comment.article_id, author: @comment.author, content: @comment.content } }
     end
 
     assert_redirected_to comment_url(Comment.last)
@@ -43,6 +47,6 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
       delete comment_url(@comment)
     end
 
-    assert_redirected_to comments_url
+    assert_redirected_to article_comments_url(@comment.article)
   end
 end

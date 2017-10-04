@@ -2,7 +2,8 @@ require 'test_helper'
 
 class BlogsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @blog = blogs(:one)
+    owner = create(:user)
+    @blog = create(:blog, owner: owner)
   end
 
   test "should get index" do
@@ -17,7 +18,7 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create blog" do
     assert_difference('Blog.count') do
-      post blogs_url, params: { blog: { description: @blog.description, domain: @blog.domain, title: @blog.title, user_id: @blog.user_id } }
+      post blogs_url, params: { blog: { description: @blog.description, domain: @blog.domain, title: @blog.title, owner_id: @blog.owner_id } }
     end
 
     assert_redirected_to blog_url(Blog.last)
@@ -34,7 +35,7 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update blog" do
-    patch blog_url(@blog), params: { blog: { description: @blog.description, domain: @blog.domain, title: @blog.title, user_id: @blog.user_id } }
+    patch blog_url(@blog), params: { blog: { description: @blog.description, domain: @blog.domain, title: @blog.title, owner_id: @blog.owner_id } }
     assert_redirected_to blog_url(@blog)
   end
 

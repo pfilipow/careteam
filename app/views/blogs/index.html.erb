@@ -8,7 +8,7 @@
       <th>Domain</th>
       <th>Title</th>
       <th>Description</th>
-      <th>User</th>
+      <th>Owner</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,7 +19,7 @@
         <td><%= blog.domain %></td>
         <td><%= blog.title %></td>
         <td><%= blog.description %></td>
-        <td><%= blog.user %></td>
+        <td><%= blog.owner.name %></td>
         <td><%= link_to 'Show', blog %></td>
         <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
         <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>

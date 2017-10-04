@@ -12,19 +12,20 @@ class ArticlesController < ApplicationController
   def show
   end
 
-  # GET /articles/new
+  # GET /blog/:blog_id/articles/new
   def new
-    @article = Article.new
+    @blog = Blog.find params[:blog_id]
+    @article = @blog.articles.new
   end
 
   # GET /articles/1/edit
   def edit
   end
 
-  # POST /articles
-  # POST /articles.json
+  # POST /blog/:blog_id/articles
   def create
-    @article = Article.new(article_params)
+    @blog = Blog.find params[:blog_id]
+    @article = @blog.articles.new(article_params)
 
     respond_to do |format|
       if @article.save
@@ -56,7 +57,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to blog_articles_url(@article.blog), notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +70,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:blog_id, :title, :content, :author_id)
+      params.require(:article).permit(:title, :content, :author_id)
     end
 end

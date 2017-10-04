@@ -4,7 +4,8 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @article = Article.find params[:article_id]
+    @comments = @article.comments.all
   end
 
   # GET /comments/1
@@ -14,7 +15,8 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    @article = Article.find params[:article_id]
+    @comment = @article.comments.new
   end
 
   # GET /comments/1/edit
@@ -56,7 +58,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to article_comments_url(@comment.article), notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
