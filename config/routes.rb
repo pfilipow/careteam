@@ -1,16 +1,15 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users
 
   resources :users
 
-  resources :blogs do
-    resources :articles, only: [:index, :create, :new]
-  end
-
-  resources :articles, only: [:edit, :show, :update, :destroy] do
+  resources :blogs
+  
+  resources :articles do
     resources :comments, only: [:index, :create, :new]
   end
 
   resources :comments, only: [:edit, :show, :update, :destroy]
 
+  root "articles#index"
 end

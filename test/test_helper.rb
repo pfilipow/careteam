@@ -6,7 +6,7 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
-  #include Devise::Test::IntegrationHelpers
+  include Devise::Test::IntegrationHelpers
   include ActiveJob::TestHelper
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.

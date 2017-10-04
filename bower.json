@@ -1,0 +1,19 @@
+{
+  "name": "careteam-blog-ex",
+  "version": "0.0.0",
+  "authors": [
+    "Paul Filipow <paul@filipow.ca>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pure": "^1.0.0"
+  }
+}

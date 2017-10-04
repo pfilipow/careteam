@@ -9,18 +9,18 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get blog_articles_url(@article.blog)
+    get articles_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_blog_article_url(@article.blog)
+    get new_article_url
     assert_response :success
   end
 
   test "should create article" do
     assert_difference('Article.count') do
-      post blog_articles_url(@article.blog), params: { article: { author_id: @article.author_id, blog_id: @article.blog_id, content: @article.content, title: @article.title } }
+      post articles_url, params: { article: { author_id: @article.author_id, blog_id: @article.blog_id, content: @article.content, title: @article.title } }
     end
 
     assert_redirected_to article_url(Article.last)
@@ -46,6 +46,6 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
       delete article_url(@article)
     end
 
-    assert_redirected_to blog_articles_url(@article.blog)
+    assert_redirected_to articles_url
   end
 end

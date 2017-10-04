@@ -1,0 +1,56 @@
+@import "variables";
+
+.global-header {
+  //position: fixed;
+  width: 100%;
+  background-color: $lightBlack;
+  overflow: hidden;
+
+
+  padding-right: 20px;
+  height: 40px;
+  border: 0px solid #41AFFF;
+  border-width: 2px 0 1px 0;
+  color: #ccc;
+  .top-space{
+    height: 10px;
+  }   
+  a, a:visited{
+    color: #ccc;
+  }
+
+  .nav{
+    text-align: right;
+    i{
+      font-size: 120%;
+      padding-right: 5px;
+      vertical-align: text-top;
+    }
+
+    a{
+      cursor: pointer;
+      height: 100%;
+      color: #ccc;
+    }
+    a:hover{
+      cursor: pointer;
+      background-color: transparent;
+      color: #fff;
+    }
+
+
+    .top-account{
+      text-align: left;
+      margin-bottom: 30px;
+      font-size: 12px;
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .top-space{
+    display: none;
+  }
+}
+

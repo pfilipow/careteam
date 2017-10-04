@@ -2,8 +2,10 @@ require 'test_helper'
 
 class BlogsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    owner = create(:user)
-    @blog = create(:blog, owner: owner)
+    @owner = create(:user)
+    @blog = create(:blog, owner: @owner)
+
+    sign_in @owner
   end
 
   test "should get index" do

@@ -1,20 +1,20 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+
+  # @blog set in application controller
 
   # GET /articles
-  # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = @blog.articles.all
   end
 
   # GET /articles/1
-  # GET /articles/1.json
   def show
   end
 
-  # GET /blog/:blog_id/articles/new
+  # GET /articles/new
   def new
-    @blog = Blog.find params[:blog_id]
     @article = @blog.articles.new
   end
 
@@ -22,9 +22,8 @@ class ArticlesController < ApplicationController
   def edit
   end
 
-  # POST /blog/:blog_id/articles
+  # POST /articles
   def create
-    @blog = Blog.find params[:blog_id]
     @article = @blog.articles.new(article_params)
 
     respond_to do |format|
@@ -57,7 +56,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to blog_articles_url(@article.blog), notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,11 +64,11 @@ class ArticlesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params[:id])
+      @article = @blog.articles.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :author_id)
+      params.require(:article).permit(:title, :content).merge(author: current_user)
     end
 end

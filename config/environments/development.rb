@@ -26,10 +26,30 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
+  #config.action_mailer.smtp_settings = {
+  #  :user_name => Rails.application.secrets.sendgrid_login,
+  #  :password => Rails.application.secrets.sendgrid_password,
+  #  :address => 'smtp.sendgrid.net',
+  #  :domain => 'smtp.sendgrid.net',
+  #  :port => '587',
+  #  :authentication => :plain
+  #}
+  config.action_mailer.smtp_settings = {
+    :user_name => '44283131a187fa3b9',
+    :password => '46d74d98915cf2',
+    :address => 'mailtrap.io',
+    :domain => 'mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

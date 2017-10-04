@@ -3,7 +3,7 @@ FactoryGirl.define do
   factory :user, aliases: [:owner, :author] do
     email               {Faker::Internet.unique.email}
     name                {Faker::Name.name}
-    #password            {Faker::Internet.password}
+    password            {Faker::Internet.password}
     #confirmed_at        DateTime.now
     #confirmation_token  {Faker::Crypto.unique.sha1}
   end
