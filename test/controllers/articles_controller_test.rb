@@ -2,10 +2,13 @@ require 'test_helper'
 
 class ArticlesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    blog = create(:blog, owner: create(:user))
+    @domain = "example.com"
+    blog = create(:blog, owner: create(:user), domain: @domain)
     author = create(:user)
 
     @article = create(:article, blog: blog, author: author)
+
+    sign_in author
   end
 
   test "should get index" do

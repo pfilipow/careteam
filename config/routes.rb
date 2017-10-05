@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   resources :blogs
   
   resources :articles do
-    resources :comments, only: [:index, :create, :new]
+    resources :comments, only: [:index, :create]
   end
 
-  resources :comments, only: [:edit, :show, :update, :destroy]
+  resources :comments, only: [:show]
 
   root "articles#index"
 end

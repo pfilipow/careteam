@@ -1,5 +1,4 @@
-%p#notice= notice
-%h1 Blogs
+%h2 Top Blogs by Articles
 %table
   %thead
     %tr
@@ -11,14 +10,61 @@
       %th{colspan: 2}
 
   %tbody
-    - @blogs.each do |blog|
+    - Blog.all_by_article_count.limit(10).each do |blog|
       %tr
         %td= blog.domain
         %td= blog.title
         %td= blog.description
-        %td= blog.owner.name
+        %td= blog.owner
         %td= blog.created_at.localtime.to_formatted_s(:short) 
         %td= link_to pluralize(blog.articles.count, "article"), "#{request.protocol}#{blog.domain}:#{request.port}"
         %td= pluralize(blog.comments.count, "comment")
-%br/
+
+%h2 Top Blogs by Comments
+%table
+  %thead
+    %tr
+      %th Domain
+      %th Title
+      %th Description
+      %th Owner
+      %th Created
+      %th{colspan: 2}
+
+  %tbody
+    - Blog.all_by_comment_count.limit(10).each do |blog|
+      %tr
+        %td= blog.domain
+        %td= blog.title
+        %td= blog.description
+        %td= blog.owner
+        %td= blog.created_at.localtime.to_formatted_s(:short) 
+        %td= link_to pluralize(blog.articles.count, "article"), "#{request.protocol}#{blog.domain}:#{request.port}"
+        %td= pluralize(blog.comments.count, "comment")
+
+%h2 Recent Blogs
+%table
+  %thead
+    %tr
+      %th Domain
+      %th Title
+      %th Description
+      %th Owner
+      %th Created
+      %th{colspan: 2}
+
+  %tbody
+    - @blogs.order(created_at: :desc).limit(10).each do |blog|
+      %tr
+        %td= blog.domain
+        %td= blog.title
+        %td= blog.description
+        %td= blog.owner
+        %td= blog.created_at.localtime.to_formatted_s(:short) 
+        %td= link_to pluralize(blog.articles.count, "article"), "#{request.protocol}#{blog.domain}:#{request.port}"
+        %td= pluralize(blog.comments.count, "comment")
+
+
+
+
 = link_to 'New Blog', new_blog_path

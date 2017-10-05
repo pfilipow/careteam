@@ -1,6 +1,5 @@
 class BlogsController < ApplicationController
   before_action :require_user, except: [:index, :show]
-  skip_before_action :set_blog_from_domain
 
   # GET /blogs
   # GET /blogs.json
@@ -43,6 +42,8 @@ class BlogsController < ApplicationController
   # PATCH/PUT /blogs/1
   # PATCH/PUT /blogs/1.json
   def update
+    @blog = current_user.blogs.find params[:id]
+
     respond_to do |format|
       if @blog.update(blog_params)
         format.html { redirect_to @blog, notice: 'Blog was successfully updated.' }

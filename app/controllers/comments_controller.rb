@@ -1,14 +1,16 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_blog_from_domain
 
   # GET /article/:article_id/comments
   def index
     @article = Article.find params[:article_id]
-    @comments = @article.comments.all
+    redirect_to @article
   end
 
   # GET /comments/1
   def show
+    @comment = Comment.find(params[:id])
+    redirect_to @comment.article
   end
 
   # POST /article/:article_id/comments
@@ -28,10 +30,6 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
