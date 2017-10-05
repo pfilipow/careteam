@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
   before_action :require_user, except: [:index, :show]
+  skip_before_action :set_blog_from_domain
 
   # GET /blogs
   # GET /blogs.json

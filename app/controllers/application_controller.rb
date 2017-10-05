@@ -10,8 +10,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  private 
-  
   def set_blog_from_domain
     @blog = Blog.find_by domain: request.domain
     puts "\n\n BLOG: #{@blog}\n\n"
@@ -19,7 +17,7 @@ class ApplicationController < ActionController::Base
     unless @blog
       puts "\n\n CANNAE FIND BLOG\n\n"
       flash[:notice] = "No blog at #{request.domain}" 
-      @blog = Blog.first
+      redirect_to blogs_path
     end
   end
 
