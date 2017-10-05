@@ -1,16 +1,26 @@
-%p#notice= notice
-%p
-  %strong Blog:
-  = @article.blog
-%p
-  %strong Title:
-  = @article.title
-%p
-  %strong Content:
-  = @article.content
-%p
-  %strong Author:
-  = @article.author
-= link_to 'Edit', edit_article_path(@article)
-|
-\#{link_to 'Back', articles_path}
+
+%section
+  %header 
+    %h1.article-title= @article.title
+    .article-meta
+      .author= @article.author
+      .date= @article.created_at.localtime.to_formatted_s(:long) 
+    -if @article.blog.user_is_owner current_user
+      .actions
+        = link_to 'Edit', edit_article_path(@article)
+        |
+        = link_to 'Delete', @article, method: :delete, data: { confirm: "Are you sure? This will delete article and all comments. This action is undoeable" }
+
+  .article-content
+    =simple_format @article.content
+
+
+
+
+#{link_to 'Back', articles_path}
+
+
+%section
+  %h2.comments Comments
+  = render "comments/index", article: @article
+  = render "comments/form", article: @article, comment: @article.comments.new

@@ -1,4 +1,4 @@
-= form_for [@article, comment] do |f|
+= form_for([article, comment]) do |f|
   - if comment.errors.any?
     #error_explanation
       %h2
@@ -8,13 +8,11 @@
         - comment.errors.full_messages.each do |message|
           %li= message
   .field
-    = f.label :article_id
-    = f.text_field :article_id
+    = f.label :author, "Name"
+    = f.text_field :author
   .field
-    = f.label :author
-    = f.text_area :author
-  .field
-    = f.label :content
+    = f.label :content, "Comment"
     = f.text_area :content
   .actions
-    = f.submit
+    = f.submit "Post"
+

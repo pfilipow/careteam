@@ -1,16 +1,8 @@
 %p#notice= notice
-%p
-  %strong Domain:
-  = @blog.domain
-%p
-  %strong Title:
-  = @blog.title
-%p
-  %strong Description:
-  = @blog.description
-%p
-  %strong Owner:
-  = @blog.owner.name
-= link_to 'Edit', edit_blog_path(@blog)
-|
-\#{link_to 'Back', blogs_path}
+
+%h1= @blog.title
+
+%p= @blog.domain
+
+%p= @blog.owner
+
