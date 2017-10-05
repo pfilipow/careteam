@@ -42,6 +42,13 @@
                 = link_to edit_user_registration_path, class: "pure-menu-link" do
                   %i.fa.fa-user
                   = current_user.email
+            - else
+
+              %li.pure-menu-item
+                = link_to new_user_session_path, class: "pure-menu-link" do
+                  %i.fa.fa-sign-in
+                  Sign In
+
 
     %p#notice= notice
 
