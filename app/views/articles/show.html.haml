@@ -23,4 +23,5 @@
 %section
   %h2.comments Comments
   = render "comments/index", article: @article
-  = render "comments/form", article: @article, comment: @article.comments.new
+  .comment-form
+    = render "comments/form", article: @article, comment: @article.comments.new
