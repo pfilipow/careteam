@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-        @domain = "example.com"
+    @domain = "www.example.com"
 
     blog = create(:blog, owner: create(:user), domain: @domain)
     author = create(:user)

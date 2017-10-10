@@ -14,11 +14,8 @@ class ApplicationController < ActionController::Base
     domain = subdomains.join(".")
 
     @blog = Blog.find_by domain: domain
-    puts "\n\n domain: #{domain}\n\n"
-    puts "\n\n BLOG: #{@blog}\n\n"
 
     unless @blog
-      puts "\n\n CANNAE FIND BLOG\n\n"
       flash[:notice] = "No blog at #{request.domain}" 
       redirect_to blogs_path
     end
