@@ -10,7 +10,11 @@ class ApplicationController < ActionController::Base
   end
   
   def set_blog_from_domain
-    @blog = Blog.find_by domain: request.domain
+    subdomains = request.subdomains << request.domain
+    domain = subdomains.join(".")
+
+    @blog = Blog.find_by domain: domain
+    puts "\n\n domain: #{domain}\n\n"
     puts "\n\n BLOG: #{@blog}\n\n"
 
     unless @blog

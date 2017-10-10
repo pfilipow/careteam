@@ -39,9 +39,6 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -56,6 +53,15 @@ group :development, :test do
 end
 
 group :development do
+  # Deploy with Capistrano
+  gem 'capistrano', '~> 3.8.1'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rails', '~> 1.1', require: false 
+  gem 'capistrano-bundler', '~> 1.1', require: false 
+  gem 'capistrano-bower'
+  gem 'capistrano-rbenv'
+  #gem 'capistrano3-delayed-job', '~> 1.0'
+
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
